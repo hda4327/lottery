@@ -1,0 +1,1 @@
+<picker mode="selector" range="{{pickList}}" range-key="{{pickKey}}" data-event-opts="{{[['change',[['handlerChange',['$event']]]]]}}" bindchange="__e"><view class="picker-item">{{''+pickTitle+''}}<view class="pull-down"></view></view></picker>

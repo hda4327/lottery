@@ -1,0 +1,1 @@
+<view hidden="{{!(isShow)}}" class="modal-cover data-v-37ef893c"><view class="modal-content data-v-37ef893c"><view class="img data-v-37ef893c"><slot name="img"></slot></view><view class="tip data-v-37ef893c"><block wx:if="{{$slots.tip}}"><slot name="tip"></slot></block><block wx:else>恭喜中枪，you die</block></view><view class="down-arrow data-v-37ef893c"></view></view></view>

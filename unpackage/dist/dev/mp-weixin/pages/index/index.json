@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "抽奖",
+  "usingComponents": {
+    "w-picker": "/components/w-picker/w-picker",
+    "chou-jiang": "/components/sherpa-jiugongge/sherpa-jiugongge",
+    "picker-box": "/components/picker/PickerBox",
+    "modal": "/components/modal/Modal"
+  }
+}

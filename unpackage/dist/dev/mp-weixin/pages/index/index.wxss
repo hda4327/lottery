@@ -1,0 +1,140 @@
+
+.content {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+.logo {
+	height: 200rpx;
+	width: 200rpx;
+	margin-top: 200rpx;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50rpx;
+}
+.text-area {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+.title {
+	font-size: 36rpx;
+	color: #8f8f94;
+}
+.btn {
+	width: 150px;
+	font-size: 15px;
+}
+.change-tip {
+	position: fixed;
+	left: 50%;
+	bottom: 20px;
+	-webkit-transform: translate(-50%, 0);
+	    -ms-transform: translate(-50%, 0);
+	        transform: translate(-50%, 0);
+}
+.canvasContent {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	padding-top: 50rpx;
+}
+.canvasName {
+	width: 80%;
+	height: calc(100vh - 300rpx);
+}
+.canvasText {
+	margin: 30rpx 0 20rpx;
+	color: #FFFFFF;
+}
+.errorImage {
+	width: 80rpx;
+	height: 80rpx;
+}
+.maskButton {
+	color: white;
+	font-size: 34rpx;
+	line-height: 96rpx;
+	width: 100%;
+	height: 96rpx;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #13c46f;
+	border-radius: 0;
+	border: none;
+}
+.maskButton::after {
+	border: none
+}
+.maskButton-hover {
+	background-color: #0c8f49;
+}
+@-webkit-keyframes showMask {
+0% {
+		opacity: 0;
+}
+100% {
+		opacity: 1;
+}
+}
+@keyframes showMask {
+0% {
+		opacity: 0;
+}
+100% {
+		opacity: 1;
+}
+}
+@-webkit-keyframes dismissMask {
+0% {
+		opacity: 1;
+}
+100% {
+		opacity: 0;
+}
+}
+@keyframes dismissMask {
+0% {
+		opacity: 1;
+}
+100% {
+		opacity: 0;
+}
+}
+

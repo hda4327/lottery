@@ -1,0 +1,13 @@
+
+.picker-item{
+	width: 200px;
+	height: 40px;
+	background: #007AFF;
+	border-radius: 15px;
+	text-align: center;
+	line-height: 40px;
+	color: #fff;
+}
+.pull-down{
+}
+

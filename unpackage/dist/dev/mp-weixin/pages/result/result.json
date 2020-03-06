@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "邻牙-口腔行业测年薪",
+  "usingComponents": {
+    "draw-to-canvas": "/components/drawToCanvas/DrawToCanvas"
+  }
+}
