@@ -3,6 +3,9 @@ import App from './App'
 
 Vue.config.productionTip = false
 
+
+Vue.prototype.$EventBus = new Vue()
+
 App.mpType = 'app'
 
 const app = new Vue({

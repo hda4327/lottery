@@ -1,10 +1,14 @@
 <template>
-	<picker mode="selector" :range="pickList" :range-key="pickKey" @change="handlerChange">
-		<view class="picker-item">
-			{{pickTitle}}
-			<view class="pull-down"></view>
-		</view>
-	</picker>
+	<div class="picker-item">
+		<slot>
+			<picker mode="selector" :range="pickList" :range-key="pickKey" @change="handlerChange">
+				<span class="title">{{pickTitle}}</span>
+				<img class="pull-down" src="@/static/img/pull-down.png" />
+			
+			</picker>
+		</slot>
+		
+	</div>
 </template>
 
 <script>
@@ -21,29 +25,33 @@
 				},
 				type: Array,
 				// 验证数组里每个值都是object类型
-				validator:function (value) {
-					return value.length>0 && value.every((val)=>{return typeof val =='object'})
-				}
+				// validator:function (value) {
+				// 	return value.length>0 && value.every((val)=>{return typeof val =='object'})
+				// }
 			},
 			pickTitle:{
 				default: '期望工作城市?',
 				type: String
+			},
+			typeId:{
+				default:()=>{
+					return 0
+				},
+				type: Number
 			}
 			
 		},
 		computed:{
 			pickKey(){
-				if(this.pickList){
-					
-					return Object.keys(this.pickList[0])[0]
+				if(this.pickList.length>0){
+					return 'name'
 				}
 				return null
 			}
 		},
 		methods:{
 			handlerChange(res){
-				console.log(res)
-				this.$emit('putRes', res.detail)
+				this.$emit('putRes', {pick:res.detail, typeId:this.typeId})
 			}
 		}
 		}
@@ -52,16 +60,27 @@
 
 <style>
 .picker-item{
-	width: 200px;
-	height: 40px;
-	background: #007AFF;
-	border-radius: 15px;
-	text-align: center;
-	line-height: 40px;
-	color: #fff;
+	width:566rpx;
+	height:80rpx;
+	background:rgba(109,196,255,1);
+	border-radius:40rpx;
+	line-height: 80rpx;
+	
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	position:relative
 }
 .pull-down{
-	
-	
+	width: 26rpx;
+	height: 15rpx;
+	position: absolute;
+	right: 51rpx;
+	top:32rpx;
 }
+.title{
+	font-weight: bold;
+	font-size:30rpx;
+	margin-left: 60rpx;
+}
+
 </style>

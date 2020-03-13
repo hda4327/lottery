@@ -20,91 +20,64 @@
  -->
  <!-- 3. 中奖前缀 -->
 <template>
-	<view>
 		<!--index.wxml-->
 		<view class="container">
 			<!-- 停止位置:<input :value='luckPosition' style="width:100%;text-align:center" @input='input' type='number'></input> -->
 			<view class='frame_view'>
-				<view class='frame_row'>
-					<view class='frame_item frame_item0' :style='{"opacity":color[0]}' :src="images[0]">
-						<view class="title">
-							{{luckyProList[1].name}}
-						</view>
-						<view class="img">
-							<image src="https://crm.szqhtr.com/image/icon_personal_QRcode@2x.png" mode=""></image>
-						</view>
+				<image src="../../static/img/lottery-content.png" alt="">
+				</image>	
+				<view class="lottery-list">
+					<view class='frame_row'>
+						<image class='frame_item frame_item0' :src="luckyProList[0].src" :style='{"opacity":color[0]}' >
+							
+						</image>
+						<image class='frame_item frame_item1' :src="luckyProList[1].src" :style='{"opacity":color[1]}'>
+							
+						</image>
+						<image class='frame_item frame_item2' :src="luckyProList[2].src" :style='{"opacity":color[2]}'>
+						
+						</image>
 					</view>
-					<view class='frame_item frame_item1' :style='{"opacity":color[1]}' :src="images[0]">
-						<view class="title">
-							{{luckyProList[2].name}}
+					
+					<view class='frame_row' style="margin-top: 8rpx;">
+						<image class='frame_item frame_item7' :style='{"opacity":color[7]}' :src="luckyProList[7].src" >
+							
+						</image>
+						<!-- 点击抽奖 -->
+						<view class='frame_item click-lucky' @click="clickLucks()">
+							<image src="../../static/img/lottery-start.png" mode=""></image>
 						</view>
-						<view class="img">
-							<image src="https://crm.szqhtr.com/image/icon_personal_QRcode@2x.png" mode=""></image>
-						</view>
+						<image class='frame_item frame_item3' :style='{"opacity":color[3]}' :src="luckyProList[3].src" >
+							
+						</image>
 					</view>
-					<view class='frame_item frame_item2' :style='{"opacity":color[2]}' :src="images[0]">
-						<view class="title">
-							{{luckyProList[3].name}}
-						</view>
-						<view class="img">
-							<image src="https://crm.szqhtr.com/image/icon_personal_QRcode@2x.png" mode=""></image>
-						</view>
-					</view>
-				</view>
-
-				<view class='frame_row'>
-					<view class='frame_item frame_item7' :style='{"opacity":color[7]}' :src="images[0]">
-						<view class="title">
-							{{luckyProList[8].name}}
-						</view>
-						<view class="img">
-							<image src="https://crm.szqhtr.com/image/icon_personal_QRcode@2x.png" mode=""></image>
-						</view>
-					</view>
-					<image class='frame_item' :src='btnconfirm' @click="clickLucks()"></image>
-					<view class='frame_item frame_item3' :style='{"opacity":color[3]}' :src="images[0]">
-						<view class="title">
-							{{luckyProList[4].name}}
-						</view>
-						<view class="img">
-							<image src="https://crm.szqhtr.com/image/icon_personal_QRcode@2x.png" mode=""></image>
-						</view>
+					
+					<view class='frame_row' style="margin-top: 8rpx;">
+						<image class='frame_item frame_item6' :style='{"opacity":color[6]}' :src="luckyProList[6].src" >
+						
+						</image>
+						<image class='frame_item frame_item5' :style='{"opacity":color[5]}' :src="luckyProList[5].src" >
+						</image>
+						<image class='frame_item frame_item4' :style='{"opacity":color[4]}' :src="luckyProList[4].src" >
+						</image>
+						
+					<!-- 	<image class='frame_item frame_item6' :style='{"opacity":color[6]}' :src="luckyProList[6].src" >
+						
+						</image> -->
 					</view>
 				</view>
-
-				<view class='frame_row'>
-					<view class='frame_item frame_item6' :style='{"opacity":color[6]}' :src="images[0]">
-						<view class="title">
-							{{luckyProList[7].name}}
-						</view>
-						<view class="img">
-							<image src="https://crm.szqhtr.com/image/icon_personal_QRcode@2x.png" mode=""></image>
-						</view>
-					</view>
-					<view class='frame_item frame_item5' :style='{"opacity":color[5]}' :src="images[0]">
-						<view class="title">
-							{{luckyProList[6].name}}
-						</view>
-						<view class="img">
-							<image src="https://crm.szqhtr.com/image/icon_personal_QRcode@2x.png" mode=""></image>
-						</view>
-					</view>
-					<view class='frame_item frame_item4' :style='{"opacity":color[4]}' :src="images[0]">
-						<view class="title">
-							{{luckyProList[5].name}}
-						</view>
-						<view class="img">
-							<image src="https://crm.szqhtr.com/image/icon_personal_QRcode@2x.png" mode=""></image>
-						</view>
-					</view>
-				</view>
+				
+				
 			</view>
+			
 		</view>
 
-	</view>
 </template>
 
 <script>
+	import {reqLotteryList, reqSavePrize, reqBrushNum, reqHaveNum} from '@/network/lottery.js'
+	
+	
 	//计数器
 	var interval = null;
 	//值越大旋转时间越长  即旋转速度
@@ -113,46 +86,39 @@
 		data() {
 			return {
 				color: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-				images: ['../../static/sherpa-jiugongge/item.png', '../../static/sherpa-jiugongge/item1.png',
-					'../../static/sherpa-jiugongge/item.png', '../../static/sherpa-jiugongge/item1.png',
-					'../../static/sherpa-jiugongge/item.png', '../../static/sherpa-jiugongge/item1.png',
-					'../../static/sherpa-jiugongge/item.png', '../../static/sherpa-jiugongge/item1.png',
-					'../../static/sherpa-jiugongge/item.png'
-				],
-				btnconfirm: '../../static/sherpa-jiugongge/dianjichoujiang.png',
+				images: [],
 				clickLuck: 'clickLuck',
-				luckPosition: null,
-				initChangeNum: this.changeNum 
+				luckPosition: 0,
+				initChangeNum: 0,
+				luckyProList:{},
+				tipPrefix:'恭喜您获得“',
+				tipPostfix:'”！',
+				modalTip: '',
+				
+				testImg: ''
+				
 			}
+		},
+		components:{
+			
+		},
+		created() {
+			// uni.hideLoading()
+			this.loadAnimation();
+			 reqLotteryList(res=>{
+				this.luckyProList = res.data
+			})
+			reqHaveNum(res=>{
+				this.initChangeNum = res.data.brush_num
+				this.$emit('changeNum', this.initChangeNum)
+			}, {open_id:uni.getStorageSync('openid')})
 		},
 		props:{
 			intime:{
 				default: 50,
 				type: Number
 			},
-			luckyProList: {
-				default:()=>{
-					return {
-					 1:{prob:0.5,name: '50000人冥币', tip:'50000人冥币'},
-					 2:{prob:0.08,name: '一个大耳刮子', tip:'一个大耳刮子'},
-					 3:{prob:0.08,name: '一阵掌声', tip:'一阵掌声'},
-					 4:{prob:0.08,name: '一个巴掌', tip:'一个巴掌'},
-					 5:{prob:0.07,name: '一个红buff', tip:'一个红buff'},
-					 6:{prob:0.07,name: '掌嘴', tip:'掌嘴'},
-				     7:{prob:0.07,name: 'b脸抽肿', tip:'b脸抽肿'},
-					 8:{prob:0.05,name: '机会不中用啊', tip:'机会不中用啊'},
-						}
-					 },
-				type: Object
-			},
-			tipPrefix :{
-				default: '给你',
-				type: String
-			},
-			changeNum:{
-				default: 3,
-				type: Number
-			}
+			
 			
 		},
 		methods: {
@@ -177,6 +143,7 @@
 				tmpList.every((num,i)=>{
 					if(ranNum>num){
 						this.luckPosition = 8-i
+						
 						return false
 					}else{
 						return true
@@ -184,27 +151,25 @@
 					
 					
 				})
+				
+				console.log(this.luckPosition)  //中奖结果已有
+			},
+			toReqSaveRecord(){
+				let param = {
+					name:this.luckyProList[this.luckPosition]['tip'],
+					open_id: uni.getStorageSync('openid'),
+					phone: uni.getStorageSync('phone')
+				}
+				reqSavePrize((res)=>{console.log(res)}, param)
+				reqBrushNum((res)=>{console.log(res)}, {open_id: param.open_id})
 			},
 			//点击抽奖按钮
 			clickLucks() {
-				this.computeLucyList()
 
 				if (this.clickLuck == 'clickLuck') {
-					var e = this;
-					//判断中奖位置格式
-					// if (e.luckPosition == null || isNaN(e.luckPosition) || e.luckPosition > 7) {
-					// 	uni.showModal({
-					// 		title: '提示',
-					// 		content: '请填写正确数值',
-					// 		showCancel: false,
-					// 		success: res => {},
-					// 		fail: () => {},
-					// 		complete: () => {}
-					// 	});
-					// 	return;
-					// }
+					console.log('cishu', this.initChangeNum)
 					// 判断抽奖次数是否为0
-					if (e.initChangeNum<=0) {
+					if (this.initChangeNum<=0) {
 						uni.showModal({
 							title: '提示',
 							content: '您已抽过奖品了',
@@ -215,14 +180,16 @@
 						});
 						return;
 					}else{
-						e.initChangeNum --
-						this.$emit('get-lottery', {changeNum: e.initChangeNum, position: e.luckPosition})
+						this.computeLucyList()
+						this.toReqSaveRecord()
 						
+						this.initChangeNum --
+						this.$emit('changeNum', this.initChangeNum)
 					}
 
 					//设置按钮不可点击
-					e.btnconfirm = '../../static/sherpa-jiugongge/dianjichoujiangd.png';
-					e.clickLuck = '';
+					// e.btnconfirm = '../../static/sherpa-jiugongge/dianjichoujiangd.png';
+					this.clickLuck = '';
 
 					//清空计时器
 					clearInterval(interval);
@@ -232,18 +199,18 @@
 						if (index > 7) {
 							index = 0;
 							// e.color[7] = 0.5
-							e.$set(e.color, 7, 0.5);
+							this.$set(this.color, 7, 0.5);
 						} else if (index != 0) {
 							// e.color[index - 1] = 0.5
-							e.$set(e.color, index-1, 0.5);
+							this.$set(this.color, index-1, 0.5);
 						}
-						e.$set(e.color, index, 1);
+						this.$set(this.color, index, 1);
 						index++;
-					}, e.intime);
+					}, this.intime);
 					//模拟网络请求时间  设为两秒
 					var stoptime = 2000;
-					setTimeout(function() {
-						e.stop(e.luckPosition);
+					setTimeout(()=> {
+						this.stop(this.luckPosition);
 					}, stoptime)
 				}
 			},
@@ -292,21 +259,41 @@
 						setTimeout(()=> {
 							// if (which == 0) {
 								//中奖
-								uni.showModal({
-									content: this.tipPrefix + e.luckyProList[which+1].tip,
-									showCancel: false,
-									confirmColor: "#F8C219",
-									success: res => {
-										if (res.confirm) {
-											//设置按钮可以点击
-											e.btnconfirm = '../../static/sherpa-jiugongge/dianjichoujiang.png';
-											e.clickLuck = 'clickLuck';
-											e.loadAnimation();
-										}
-									},
-									fail: () => {},
-									complete: () => {}
-								});
+								// uni.showModal({
+								// 	content: this.tipPrefix + e.luckyProList[which+1].tip,
+								// 	showCancel: false,
+								// 	confirmColor: "#F8C219",
+								// 	success: res => {
+								// 		if (res.confirm) {
+								// 			//设置按钮可以点击
+								// 			// e.btnconfirm = '../../static/sherpa-jiugongge/dianjichoujiang.png';
+								// 			e.clickLuck = 'clickLuck';
+								// 			e.loadAnimation();
+								// 		}
+								// 	},
+								// 	fail: () => {},
+								// 	complete: () => {}
+								// });
+								// this.$refs.modal.modalShow = true
+								this.clickLuck = 'clickLuck';
+								this.loadAnimation();
+								
+								let onload = {
+									luckPosition: this.luckPosition,
+									tip:  this.tipPrefix + this.luckyProList[which].tip + this.tipPostfix,
+									isWin: true,
+									// p1 : '扫码关注公众号',
+									// p2: '客服联系您领奖'
+								}
+								if(which===1){
+									onload.isWin = false
+									onload.tip = '很遗憾您未中奖，谢谢参与！'
+									
+									// onload.p1 = '更多惊喜'
+									// onload.p2 = '关注公众号'
+								}
+								
+								this.$EventBus.$emit('closeModal', onload)
 							// } 
 							// else {
 							// 	//未中奖
@@ -351,19 +338,18 @@
 				}
 			}
 		},
-		onLoad() {
-			uni.hideLoading()
-			this.loadAnimation();
-		}
+		
 	}
 </script>
 
 <style>
+	
 	/**index.wxss**/
 	.container {
 		/* position: fixed; */
 		width: 100%;
 		height: 100%;
+		
 	}
 
 	.frame_view {
@@ -372,71 +358,52 @@
 		margin-top: -315upx;
 		left: 50%;
 		margin-left: -315upx; */
-		width: 590upx;
-		height: 590upx;
+		width: 601rpx;
+		height: 611rpx;
 		padding: 20upx;
-		background: #792db3;
+		/* background: #792db3; */
 		z-index: 3;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
-		border-radius: 30upx;
+		/* position: relative; */
+		
+	}
+	.frame_view>image{
+		width: 601rpx;
+		height: 611rpx;
+
+	}
+	.lottery-list{
+		position: absolute;
 	}
 
 	.frame_row {
-		width: 580upx;
-		height: 180upx;
+		width: 508rpx;
+		height: 160rpx;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		
 	}
 
 	.frame_item {
-		width: 180upx;
-		height: 180upx;
+		width: 160rpx;
+		height: 160rpx;
 		z-index: 9;
+		background-size: 100% 100%;
+		
+	}
+	.click-lucky image{
+		width: 161rpx;
+		height: 161rpx;
 	}
 
 	.frame_item0 {
-		background: url("../../static/sherpa-jiugongge/item.png")no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.frame_item1 {
-		background: url("../../static/sherpa-jiugongge/item1.png")no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.frame_item2 {
-		background: url("../../static/sherpa-jiugongge/item.png")no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.frame_item3 {
-		background: url("../../static/sherpa-jiugongge/item1.png")no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.frame_item4 {
-		background: url("../../static/sherpa-jiugongge/item.png")no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.frame_item5 {
-		background: url("../../static/sherpa-jiugongge/item1.png")no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.frame_item6 {
-		background: url("../../static/sherpa-jiugongge/item.png")no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.frame_item7 {
-		background: url("../../static/sherpa-jiugongge/item1.png")no-repeat center;
-		background-size: 100% 100%;
+		
+		
 	}
 
 	.frame_item>view {

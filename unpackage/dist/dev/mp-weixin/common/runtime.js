@@ -1,5 +1,5 @@
 
-  !function(){try{var a=Function("return this")();a&&!a.Math&&(Object.assign(a,{Array:Array,Date:Date,Error:Error,Function:Function,Math:Math,Object:Object,RegExp:RegExp,String:String,TypeError:TypeError,setTimeout:setTimeout,clearTimeout:clearTimeout,setInterval:setInterval,clearInterval:clearInterval}),"undefined"!=typeof Reflect&&(a.Reflect=Reflect))}catch(a){}}();
+  !function(){try{var a=Function("return this")();a&&!a.Math&&(Object.assign(a,{isFinite:isFinite,Array:Array,Date:Date,Error:Error,Function:Function,Math:Math,Object:Object,RegExp:RegExp,String:String,TypeError:TypeError,setTimeout:setTimeout,clearTimeout:clearTimeout,setInterval:setInterval,clearInterval:clearInterval}),"undefined"!=typeof Reflect&&(a.Reflect=Reflect))}catch(a){}}();
   /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
 /******/ 	function webpackJsonpCallback(data) {
@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/w-picker/w-picker":1,"components/modal/Modal":1,"components/picker/PickerBox":1,"components/sherpa-jiugongge/sherpa-jiugongge":1,"components/drawToCanvas/DrawToCanvas":1};
+/******/ 		var cssChunks = {"components/confirm-btn":1,"pages/index/chidCom/picker-content":1,"pages/index/chidCom/skill-content":1,"components/advertisement":1,"components/uni-popup/uni-popup":1,"pages/index/chidCom/auth-modal":1,"components/drawToCanvas/DrawToCanvas":1,"pages/result/childCom/two-btn":1,"components/modal/Modal":1,"components/sherpa-jiugongge/sherpa-jiugongge":1,"pages/lottery/childCom/record-show":1,"components/w-picker/w-picker":1,"components/picker/PickerBox":1,"components/uni-transition/uni-transition":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/w-picker/w-picker":"components/w-picker/w-picker","components/modal/Modal":"components/modal/Modal","components/picker/PickerBox":"components/picker/PickerBox","components/sherpa-jiugongge/sherpa-jiugongge":"components/sherpa-jiugongge/sherpa-jiugongge","components/drawToCanvas/DrawToCanvas":"components/drawToCanvas/DrawToCanvas"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/confirm-btn":"components/confirm-btn","pages/index/chidCom/picker-content":"pages/index/chidCom/picker-content","pages/index/chidCom/skill-content":"pages/index/chidCom/skill-content","components/advertisement":"components/advertisement","components/uni-popup/uni-popup":"components/uni-popup/uni-popup","pages/index/chidCom/auth-modal":"pages/index/chidCom/auth-modal","components/drawToCanvas/DrawToCanvas":"components/drawToCanvas/DrawToCanvas","pages/result/childCom/two-btn":"pages/result/childCom/two-btn","components/modal/Modal":"components/modal/Modal","components/sherpa-jiugongge/sherpa-jiugongge":"components/sherpa-jiugongge/sherpa-jiugongge","pages/lottery/childCom/record-show":"pages/lottery/childCom/record-show","components/w-picker/w-picker":"components/w-picker/w-picker","components/picker/PickerBox":"components/picker/PickerBox","components/uni-transition/uni-transition":"components/uni-transition/uni-transition"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

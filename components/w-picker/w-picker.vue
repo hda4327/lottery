@@ -187,7 +187,9 @@
 				showPicker:false,
 				resultStr:"",
 				itemHeight:`height: ${uni.upx2px(88)}px;`,
-				confirmFlag:true
+				confirmFlag:true,
+				checkCode :null,
+				getCount: 0
 			};
 		},
 		computed:{
@@ -301,6 +303,7 @@
 				this.initData();
 			},
 			selectList(){
+				
 				this.initData();
 			},
 			linkList(){
@@ -308,7 +311,6 @@
 			},
 			defaultVal(val){
 				this.initData();
-				console.log(val)
 			},
 			areaCode(){
 				this.initData();
@@ -338,6 +340,7 @@
 				let k=0;
 				let checkArr=[];
 				let checkValue=[];
+				let checkCode = null;
 				let resultStr="";
 				let data=[];
 				switch(lev){
@@ -348,7 +351,11 @@
 						dval=[0,0,0];
 						break;
 				}
+				
+				
+				
 				const getData=(obj,key,str)=>{
+					
 					if(key<lev){
 						data.push(obj);
 						if(!arr){
@@ -360,11 +367,18 @@
 								getData(item.children,key+=1);
 							}
 						}else{
+							
 							obj.map((v,j)=>{
 								if(flag?v.value==arr[key]:v.label==arr[key]){
 									dval[key]=j;
 									checkArr.push(v.label);
 									checkValue.push(v.value);
+									
+									this.getCount ++;
+									if (this.getCount<3){
+										checkCode= v.code;
+									}
+									
 									resultStr+=v.label;
 									if(v.children){
 										getData(v.children,key+=1);
@@ -377,7 +391,8 @@
 							dval,
 							checkArr,
 							checkValue,
-							resultStr
+							resultStr,
+							checkCode
 						};
 					}else{
 						return false;
@@ -519,6 +534,7 @@
 							checkArr:[...this.checkArr],
 							checkValue:[...this.checkValue],
 							defaultVal:[...this.pickVal],
+							checkCode:this.checkCode,
 							result:this.resultStr
 						});
 						break;
@@ -807,6 +823,8 @@
 								_this.data[0][arr[0]]?_this.data[0][arr[0]].value:_this.data[0][0].value,
 								_this.data[1][arr[1]]?_this.data[1][arr[1]].value:_this.data[1][0].value
 							];
+							
+							_this.checkCode = c2.code
 							_this.resultStr=c1.label+c2.label;
 						}
 						break;
@@ -880,6 +898,7 @@
 						_this.checkArr=init.checkArr;
 						_this.checkValue=init.checkValue;
 						_this.resultStr=init.resultStr;
+						_this.checkCode=init.checkCode;
 						break;
 					case "region":
 						if(_this.areaCode){
@@ -1016,7 +1035,7 @@
 			}
 		},
 		mounted() {
-			this.initData();
+			// this.initData();
 		}
 	}
 </script>

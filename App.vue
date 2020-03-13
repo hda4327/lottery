@@ -17,4 +17,7 @@
 	uni-image{
 		display: inline
 	}
+	button::after{
+		border: none;
+	}
 </style>

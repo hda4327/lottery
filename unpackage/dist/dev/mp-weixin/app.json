@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/result/result"
+    "pages/result/result",
+    "pages/lottery/lottery",
+    "pages/index/adUrl"
   ],
   "subPackages": [],
   "window": {
@@ -10,5 +12,9 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "usingComponents": {}
+  "navigateToMiniProgramAppIdList": [
+    "wx9188524557398958"
+  ],
+  "usingComponents": {},
+  "sitemapLocation": "sitemap13.json"
 }

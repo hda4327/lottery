@@ -1,0 +1,1 @@
+<view class="main data-v-21aa6859" style="{{'border:'+(hasBorder?'6rpx solid rgba(109,196,255,1)':'')+';'+('width:'+(hasBorder?'738rpx':'100%')+';')}}"><cover-image class="advertisement-img data-v-21aa6859" src="{{bg}}" alt></cover-image></view>

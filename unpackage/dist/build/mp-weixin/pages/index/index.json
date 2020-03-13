@@ -1,4 +1,10 @@
 {
-  "navigationBarTitleText": "uni-app",
-  "usingComponents": {}
+  "navigationBarTitleText": "邻牙-口腔行业测年薪",
+  "usingComponents": {
+    "confirm-btn": "/components/confirm-btn",
+    "skill-content": "/pages/index/chidCom/skill-content",
+    "advertisement": "/components/advertisement",
+    "picker-content": "/pages/index/chidCom/picker-content",
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
 }

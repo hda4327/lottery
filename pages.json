@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "抽奖"
+				"navigationBarTitleText": "邻牙-口腔行业测年薪"
 			}
 		},
 		{
@@ -11,7 +11,20 @@
 			"style": {
 				"navigationBarTitleText": "邻牙-口腔行业测年薪"
 			}
+		},
+		{
+			"path": "pages/lottery/lottery",
+			"style": {
+				"navigationBarTitleText": "邻牙-口腔行业测年薪"
+			}
+		},
+		{
+			"path": "pages/index/adUrl",
+			"style": {
+				"navigationBarTitleText": "邻牙-口腔行业测年薪"
+			}
 		}
+		
 	],
 	// "tabBar": {
 	//     "color": "#7A7E83",

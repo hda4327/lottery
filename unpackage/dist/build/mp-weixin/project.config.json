@@ -5,12 +5,15 @@
 	},
 	"setting": {
 		"urlCheck": false,
-		"newFeature": true
+		"es6": true,
+		"postcss": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
-	"appid": "wx28358506b9ae471e",
-	"projectname": "salary-game",
+	"appid": "wx22c4fb115e6f4776",
+	"projectname": "s-game",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

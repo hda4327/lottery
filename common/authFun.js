@@ -1,4 +1,5 @@
 import request from '../network/request'
+import {getKey, reqPhoneNum} from '@/network/auth.js'
 //service 值说明(String)
 
 // 值	说明
@@ -10,10 +11,10 @@ import request from '../network/request'
 //service值为oauth时返回示例： {code:"the code is a mock one"errMsg:"login:ok"}
 
 //授权登录的
-export function getCodeForOauth() {
+export function getCodeForOauth() {  //返回{code: xxx}
 	return new Promise((resolve, reject) => {
 		getProvider('oauth').then(proRes => {
-			console.log(proRes)
+			// console.log(proRes) //weixin
 			getLoginCode(proRes).then(codeRes => {
 				resolve(codeRes)
 			}, err => {
@@ -103,47 +104,48 @@ export function authForMsg(scopeVar) {
 
 }
 
-export function getPhoneNumber(e) {
-	// var msg = e.detail.errMsg;
-	// var that = this;
-	// var sessionID=that.data.userinfo.Session_key,
-	// encryptedDataStr=e.detail.encryptedData,
-	// iv= e.detail.iv;
-	const code = uni.getStorageSync('code')
-	if (msg == 'getPhoneNumber:ok') {
-		uni.checkSession({
-			success: function() {
-				that.deciyption(sessionID, encryptedDataStr, iv);
-			},
-			fail: function() {
-				getCode('oauth').then(res => {
-					uni.setStorageSync('code', res.code)
-				})
-				// uni.login({
-				//   success: res => {
-				//     console.log(res,'sessionkey过期')
-				//     request('url',{code:res.code},function(res){
-				//       // var userinfo=res.data.data;
-				//       // uni.setStorageSync('userinfo',userinfo);
-				//       // that.setData({
-				//       //   userinfo:userinfo
-				//       // });
-				//       // that.deciyption(userinfo.Session_key,encryptedDataStr,iv);
-				//     })
-				//   }
-				// })
-			}
-		})
-	}
+export function getPhoneNumber(detail) {
+	
+	return new Promise((resolve)=>{
+		const session_key = uni.getStorageSync('session_key')
+			console.log('ok')
+			uni.checkSession({
+				success: function() {
+					console.log('sessionkey未过期')
+					deciyption(detail, session_key).then(res => resolve(res))
+				},
+				fail: function() {
+					console.log('sessionkey过期')
+					
+					//1.login获取code
+					uni.login({
+						provider:'weixin',
+						success: res => {
+							//2.以code获取session_key
+							getKey(res=>{
+								uni.setStorageSync('session_key', res.session_key)
+								uni.setStorageSync('openid', res.openid)
+								//现在获取到的key已不是过期的了 3.拿session_key和detail手机加密信息调接口获取phone
+								deciyption(detail, res.session_key).then(res => resolve(res))
+								
+							} ,{code: res.code})
+					   }
+					})
+				}
+			})
+	})
+	
+}
+//发送获取手机号请求接口
+function deciyption(detail, session_key) {
+	return new Promise(resolve=>{
+		const params = {
+			session_key,
+			encryptedData: detail.encryptedData,
+			iv: detail.iv
+		}
+		reqPhoneNum(res=>resolve(res), params)
+	}) 
+
 }
 
-function deciyption(sessionID, encryptedDataStr, iv) {
-	request('url', {
-		sessionID: sessionID,
-		encryptedDataStr: encryptedDataStr,
-		iv: iv
-	}, function(res) {
-		//这个res即可返回用户的手机号码
-		console.log(res)
-	})
-}
